@@ -8,6 +8,7 @@ const pass = document.querySelector("#pass");
 const Rpass = document.querySelector("#r-pass");
 const form = document.querySelector("form");
 const button = document.querySelector("#btn");
+// const fileimg = document.querySelector("#files");
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
