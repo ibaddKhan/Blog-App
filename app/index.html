@@ -24,31 +24,36 @@
             class="input input-bordered w-24 md:w-auto"
           />
         </div>
-        <div class="dropdown dropdown-end">
+        <div class="dropdown none dropdown-end">
           <div
             tabindex="0"
             role="button"
             class="btn btn-ghost btn-circle avatar"
           >
             <div class="w-10 rounded-full">
-              <img
-                alt="Profile Photo"
-                src="https://avatars.githubusercontent.com/u/136696616?s=96&v=4"
-              />
+              <a href="../app/profile.html">
+                <img
+                  class="userPfp"
+                  alt="Profile Photo"
+                  src="../assets/defaultuserprofile.png"
+                />
+              </a>
             </div>
           </div>
-          <ul
-            class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-          >
-            <li>
-              <a class="justify-between">
-                Profile
-                <span class="badge">New</span>
-              </a>
-            </li>
-            <li><a>Settings</a></li>
-            <li><a>Logout</a></li>
-          </ul>
+          <div>
+            <ul
+              class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+            >
+              <li>
+                <a class="justify-between">
+                  Profile
+                  <span class="badge">New</span>
+                </a>
+              </li>
+              <li><a>Settings</a></li>
+              <li><a>Logout</a></li>
+            </ul>
+          </div>
         </div>
       </div>
       <div class="flex-none">
@@ -59,7 +64,7 @@
               <ul class="p-2 bg-base-300 rounded text-black">
                 <li><a href="login.html">Login</a></li>
                 <li><a href="signup.html">Signup</a></li>
-                <li><a href="index.html">Logout</a></li>
+                <li><a class="logout-btn">Logout</a></li>
               </ul>
             </details>
           </li>
@@ -68,5 +73,6 @@
     </div>
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="../scripts/index.js"></script>
   </body>
 </html>

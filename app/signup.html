@@ -14,7 +14,7 @@
   <body>
     <nav class="flex bg-[#7749F8] text-white py-2 justify-between">
       <div class="ml-8 text-xl">Personal Blogging App</div>
-      <div class="mr-16">
+      <div class="flex mr-16 text-xl">
         <a href="./login.html" class="text-xl">Login</a>
       </div>
     </nav>
@@ -78,7 +78,12 @@
               required
             />
           </div>
-          <input class="text-[#7749f8]" id="files" type="file" />
+          <input
+            class="text-[#7749f8]"
+            accept="image/*"
+            id="files"
+            type="file"
+          />
           <div class="form-control mt-6">
             <button
               id="btn"
