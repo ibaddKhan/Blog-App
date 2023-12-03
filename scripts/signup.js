@@ -26,6 +26,10 @@ form.addEventListener("submit", async (event) => {
   }
 
   const file = fileimg.files[0];
+  if (!file) {
+    alert("Add Picture");
+    return;
+  }
   const storageRef = ref(storage, email.value);
   await uploadBytes(storageRef, file);
   const url = await getDownloadURL(storageRef);
