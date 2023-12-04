@@ -23,26 +23,27 @@
     <div class="hero min-h-screen bg-base-200">
       <div class="ard mb-36 w-[60vw] mr-[20rem] shadow-2xl bg-base-100">
         <div class="img mt-10 ml-10">
-
-        <img
-          id="pfpImg"
-          src="https://i.tribune.com.pk/media/images/994712-OpenurinatingAFP-1447940655/994712-OpenurinatingAFP-1447940655.jpg"
-          width="250px"
-          class="rounded-lg"
-          height="300px"
-          alt=""
-        />
+          <img
+            id="pfpImg"
+            src="https://i.tribune.com.pk/media/images/994712-OpenurinatingAFP-1447940655/994712-OpenurinatingAFP-1447940655.jpg"
+            width="250px"
+            class="rounded-lg"
+            height="300px"
+            alt=""
+          />
         </div>
-        <form class="card-body pt-10 w-[30vw]">
+        <form id="form" class="card-body pt-10 w-[30vw]">
           <div class="form-control">
             <input
+              id="oldPass"
               class="w-[20vw] py-2 pl-2 my-2 rounded-md border-2"
-              type="email"
+              type="password"
               placeholder="Old Password"
               class="input input-bordered"
               required
             />
             <input
+              id="newPass"
               class="w-[20vw] py-2 pl-2 my-2 rounded-md border-2"
               type="password"
               placeholder="New password"
@@ -51,6 +52,7 @@
             />
 
             <input
+              id="RepeatPass"
               class="w-[20vw] py-2 pl-2 my-2 rounded-md border-2"
               type="password"
               placeholder="Repeat password"
@@ -59,7 +61,7 @@
             />
           </div>
           <div class="form-control mt-2">
-            <button class="btn btn-primary">Update</button>
+            <button type="submit" class="btn btn-primary">Update</button>
           </div>
         </form>
       </div>

@@ -7,7 +7,12 @@ import {
   uploadBytes,
   getDownloadURL,
 } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-storage.js";
-import { auth, storage } from "./config.js";
+import {
+  collection,
+  addDoc,
+} from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+
+import { auth, storage, db } from "./config.js";
 
 const fname = document.querySelector("#f-name");
 const lname = document.querySelector("#l-name");
@@ -36,12 +41,22 @@ form.addEventListener("submit", async (event) => {
   console.log(url);
   createUserWithEmailAndPassword(auth, email.value, pass.value)
     .then(async (userCredential) => {
-      window.location = "../app/profile.html";
       const user = userCredential.user;
       console.log(user);
+
+      const docRef = await addDoc(collection(db, "userDetails"), {
+        email: email.value,
+        pass: pass.value,
+        uid: user.uid,
+      });
+      console.log("Document written with ID: ", docRef.id);
+
       await updateProfile(user, {
         photoURL: url,
       });
+
+      window.location = "../app/profile.html";
+
       // ...
     })
     .catch((error) => {
