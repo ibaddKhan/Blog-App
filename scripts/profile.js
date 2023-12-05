@@ -22,7 +22,27 @@ const repeatPass = document.querySelector("#RepeatPass");
 const form = document.querySelector("#form");
 
 let obj = {};
+
 onAuthStateChanged(auth, async (user) => {
+  logoutBtn.addEventListener("click", () => {
+    if (user) {
+      signOut(auth);
+      Swal.fire({
+        icon: "success",
+        title: "Logged Out",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Already Logged Out",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  });
+
   if (user) {
     const uid = user.uid;
     form.addEventListener("submit", async (e) => {
@@ -37,36 +57,52 @@ onAuthStateChanged(auth, async (user) => {
       });
       console.log(obj);
       if (oldPass.value !== obj.pass) {
-        alert("Incorrect Old Password");
+        Swal.fire({
+          icon: "error",
+          title: "Incorrect Old Password",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         return;
       }
       if (newPass.value !== repeatPass.value) {
-        alert("Passwords are not same");
+        Swal.fire({
+          icon: "warning",
+          title: "Passwords are not same",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         return;
       }
       await updatePassword(user, newPass.value)
         .then(async () => {
-          console.log("Pass Changed Succesfully");
-
           await updateDoc(doc(db, "userDetails", obj.docId), {
             pass: newPass.value,
           });
-          console.log("updated");
+          Swal.fire({
+            icon: "success",
+            title: "Password Updated",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         })
 
         .catch((error) => {
-          console.log(error);
+          const errorMessage = error.message;
+          Swal.fire({
+            icon: "error",
+            title: errorMessage,
+            showConfirmButton: false,
+            timer: 1500,
+          });
         });
     });
 
     pfpImg.src = user.photoURL;
     console.log(user);
   } else {
-    console.log("No user logged in");
-    window.location = "../app/login.html";
+    setTimeout(() => {
+      window.location = "../app/login.html";
+    }, 1000);
   }
-});
-
-logoutBtn.addEventListener("click", () => {
-  signOut(auth);
 });

@@ -25,14 +25,25 @@ const fileimg = document.querySelector("#files");
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
+  const fullname = fname.value + " " + lname.value;
   if (pass.value !== Rpass.value) {
-    alert("Passwords are not Same");
+    Swal.fire({
+      icon: "warning",
+      title: "Passwords are not same",
+      showConfirmButton: false,
+      timer: 1500,
+    });
     return;
   }
 
   const file = fileimg.files[0];
   if (!file) {
-    alert("Add Picture");
+    Swal.fire({
+      icon: "error",
+      title: "Add a Picture",
+      showConfirmButton: false,
+      timer: 1500,
+    });
     return;
   }
   const storageRef = ref(storage, email.value);
@@ -43,7 +54,12 @@ form.addEventListener("submit", async (event) => {
     .then(async (userCredential) => {
       const user = userCredential.user;
       console.log(user);
-
+      Swal.fire({
+        icon: "success",
+        title: "Signed In as " + fname.value + " " + lname.value,
+        showConfirmButton: false,
+        timer: 1500,
+      });
       const docRef = await addDoc(collection(db, "userDetails"), {
         email: email.value,
         pass: pass.value,
@@ -52,6 +68,7 @@ form.addEventListener("submit", async (event) => {
       console.log("Document written with ID: ", docRef.id);
 
       await updateProfile(user, {
+        displayName: fullname,
         photoURL: url,
       });
 
@@ -61,6 +78,12 @@ form.addEventListener("submit", async (event) => {
     })
     .catch((error) => {
       const errorMessage = error.message;
+      Swal.fire({
+        icon: "error",
+        title: errorMessage,
+        showConfirmButton: false,
+        timer: 1500,
+      });
       console.log(errorMessage);
     });
 });
