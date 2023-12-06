@@ -1,8 +1,23 @@
 import { auth } from "./config.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+import {
+  onAuthStateChanged,
+  signOut,
+} from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+
+const logoutBtn = document.querySelector(".logout-btn");
+const nameHolder = document.querySelector("nav div h1");
+const postTitle = document.querySelector("div form #title");
+const postCaption = document.querySelector("div form #caption");
+
+
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
+    nameHolder.innerHTML = user.displayName;
+    logoutBtn.addEventListener("click", () => {
+      console.log("Log out working");
+      signOut(auth);
+    });
     const Toast = Swal.mixin({
       color: "#4b0082",
       toast: true,

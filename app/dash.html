@@ -15,12 +15,51 @@
     />
   </head>
   <body>
-    <nav class="flex bg-[#7749F8] text-white py-2 justify-between">
+    <nav class="flex bg-[#7749F8] flex-wrap text-white py-2 justify-between">
       <div class="ml-8 text-xl">Personal Blogging App</div>
       <div class="flex mr-16 text-xl">
-        <a href="./login.html" class="text-xl"></a>
+        <h1 class="text-xl mx-8"></h1>
       </div>
     </nav>
+
+    <div class="text-black font-bold ml-10 my-5 b text-3xl">Dashboard</div>
+    <div class="hero min-h-screen flex bg-base-200">
+      <div
+        class="max-w-xl my-8 w-9/12 absolute left-9 top-40 bg-white p-8 rounded-md shadow-md"
+      >
+        <form id="postForm" class="w-9/12">
+          <div class="mb-4">
+            <input
+              placeholder="Title"
+              type="text"
+              id="title"
+              class="mt-1 p-2 w-full border rounded-md focus:border-[#7749F8]"
+            />
+          </div>
+          <textarea
+            placeholder="What's on your mind"
+            id="caption"
+            class="textarea textarea-bordered textarea-lg w-full focus:border-[#7749F8]"
+          ></textarea>
+
+          <button
+            type="submit"
+            class="bg-[#7749F8] text-white my-3 px-4 py-2 rounded-md"
+          >
+            Publish Blog
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="fixed bottom-10 right-5">
+      <img
+        class="logout-btn cursor-pointer"
+        src="../assets/on-off-button.png"
+        width="40px"
+        alt=""
+      />
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
