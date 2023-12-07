@@ -15,13 +15,23 @@
     />
   </head>
   <body>
-    <nav class="flex bg-[#7749F8] flex-wrap text-white py-2 justify-between">
+    <nav class="flex bg-[#7749F8] flex-wrap text-white py-5 justify-between">
       <div class="ml-8 text-xl">Personal Blogging App</div>
-      <div class="flex mr-16 text-xl">
-        <h1 class="text-xl mx-8"></h1>
+      <div class="flex mr-16 sm:block hidden text-xl">
+        <a href="profile.html"> <h1 class="text-xl mx-8"></h1></a>
       </div>
+      <div class="absolute right-0 top-0 mr-5 mt-2 btn-circle avatar">
+        <div class="w-20 rounded-full">
+          <a href="../app/profile.html">
+            <img
+              class="userPfp"
+              alt="Profile Photo"
+              src="../assets/defaultuserprofile.png"
+            />
+          </a>
+        </div>
+      </div=>
     </nav>
-
     <div class="text-black font-bold ml-10 my-5 b text-3xl">Dashboard</div>
     <div class="hero min-h-screen flex bg-base-200">
       <div
@@ -50,17 +60,16 @@
           </button>
         </form>
       </div>
-    </div>
 
-    <div class="fixed bottom-10 right-5">
-      <img
-        class="logout-btn cursor-pointer"
-        src="../assets/on-off-button.png"
-        width="40px"
-        alt=""
-      />
+      <div class="fixed bottom-10 right-5">
+        <img
+          class="logout-btn cursor-pointer"
+          src="../assets/on-off-button.png"
+          width="40px"
+          alt=""
+        />
+      </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="module" src="../scripts/dash.js"></script>

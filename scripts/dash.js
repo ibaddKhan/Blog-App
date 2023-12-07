@@ -6,10 +6,9 @@ import {
 
 const logoutBtn = document.querySelector(".logout-btn");
 const nameHolder = document.querySelector("nav div h1");
+const profilePic = document.querySelector("nav div .userPfp");
 const postTitle = document.querySelector("div form #title");
 const postCaption = document.querySelector("div form #caption");
-
-
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
@@ -35,6 +34,7 @@ onAuthStateChanged(auth, (user) => {
       icon: "success",
       title: "Hey, " + user.displayName,
     });
+    profilePic.src = user.photoURL;
     console.log(user);
   } else {
     console.log("not a user");

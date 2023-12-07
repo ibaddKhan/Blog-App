@@ -19,9 +19,6 @@
   <body>
     <nav class="flex bg-[#7749F8] text-white py-2 justify-between">
       <div class="ml-8 text-xl">Personal Blogging App</div>
-      <div class="flex mr-16 text-xl">
-        <a href="./login.html" class="text-xl">Login</a>
-      </div>
     </nav>
 
     <div class="text-black font-bold ml-10 my-5 b text-3xl">Signup</div>
@@ -79,16 +76,23 @@
               id="r-pass"
               type="password"
               placeholder="Repeat Password"
-              class="input input-bordered"
+              class="input input-bordered inline"
               required
             />
           </div>
-          <input
-            class="text-[#7749f8]"
-            accept="image/*"
-            id="files"
-            type="file"
-          />
+          <div class="inline-block">
+            <input
+              class="text-[#7749f8] inline-block"
+              accept="image/*"
+              id="files"
+              type="file"
+            />
+          </div>
+          <a
+            href="./login.html"
+            class="label-text-alt text-sm text-md link link-hover"
+            >Already have an account?</a
+          >
           <div class="form-control mt-6">
             <button
               id="btn"
