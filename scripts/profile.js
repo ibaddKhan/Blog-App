@@ -79,6 +79,15 @@ onAuthStateChanged(auth, async (user) => {
         });
         return;
       }
+      if (oldPass.value === newPass.value) {
+        Swal.fire({
+          icon: "warning",
+          title: "Passwords cannot be same",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        return;
+      }
       if (newPass.value !== repeatPass.value) {
         Swal.fire({
           icon: "warning",
@@ -99,6 +108,7 @@ onAuthStateChanged(auth, async (user) => {
             showConfirmButton: false,
             timer: 1500,
           });
+          form.reset();
         })
 
         .catch((error) => {

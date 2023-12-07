@@ -13,7 +13,12 @@ form.addEventListener("submit", (e) => {
   signInWithEmailAndPassword(auth, email.value, password.value)
     .then((userCredential) => {
       const user = userCredential.user;
-
+      Swal.fire({
+        icon: "success",
+        title: "Logged in as " + " " + user.displayName,
+        showConfirmButton: false,
+        timer: 1500,
+      });
       window.location = "../app/profile.html";
     })
     .catch((error) => {
