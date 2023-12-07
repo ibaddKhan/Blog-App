@@ -13,6 +13,11 @@
       href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css"
       rel="stylesheet"
     />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      rel="stylesheet"
+    />
   </head>
 
   <body class="">
@@ -48,7 +53,7 @@
       <div
         class="ard mb-36 w-full md:w-[60vw] mr-4 md:mr-[20rem] shadow-2xl bg-base-100"
       >
-        <div class="img mt-10 ml-10">
+        <div class="img mt-10 relative inline-block ml-10">
           <img
             id="pfpImg"
             src="https://i.tribune.com.pk/media/images/994712-OpenurinatingAFP-1447940655/994712-OpenurinatingAFP-1447940655.jpg"
@@ -57,9 +62,28 @@
             height="300px"
             alt=""
           />
+          <div>
+            <label for="updatedImg">
+              <i
+                class="far absolute text-2xl bottom-0 right-0 mr-3 mb-1 cursor-pointer fa-edit text-[#6c43ff] mt-1"
+              ></i>
+              <input
+                type="file"
+                id="updatedImg"
+                accept="image/*"
+                class="hidden"
+              />
+            </label>
+          </div>
         </div>
-        <form id="form" class="card-body pt-10 mx-auto">
+        <form id="form" class="card-body pt-3 mx-auto">
           <div class="form-control">
+            <div class="flex">
+              <h1 class="nameHead text-xl ml-12 mr-2"></h1>
+              <i
+                class="far cursor-pointer fa-edit text-[20px] text-[#6c43ff] mt-1"
+              ></i>
+            </div>
             <input
               id="oldPass"
               class="w-full md:w-[50%] max-w-[100%] py-2 pl-2 my-2 rounded-md border-2"
