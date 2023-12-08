@@ -1,4 +1,9 @@
 # Logs
+/public
+firebase/json
+.firebaserc
+.firebase
+
 logs
 *.log
 npm-debug.log*
