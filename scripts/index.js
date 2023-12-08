@@ -115,54 +115,8 @@ async function render() {
 
    <p  class="text-[#868686] text-[14px] font-light mt-2 whitespace-normal break-words">
    ${item.caption}
-   </p>
-
-   
-
-   <div class="flex mt-3 text-sm">
-   <btn  href="#" id="remove-btn" class="font- cursor-pointer bg-transparent border-none text-[#7749F8] text-lg  mr-20" >Delete</btn>
-   <btn  href="#" id="edit-btn" class="font- cursor-pointer bg-transparent border-none text-[#7749F8]  text-lg mr-20" >Edit</btn>
-   </div>
-   
-   </div>
+   </p></div>
   `;
-  });
-  const removeBtn = document.querySelectorAll("#remove-btn");
-  const editBtn = document.querySelectorAll("#edit-btn");
-
-  removeBtn.forEach((btn, index) => {
-    btn.addEventListener("click", async () => {
-      console.log("removed at index " + index);
-
-      try {
-        await deleteDoc(doc(db, "newPost", arr[index].docId));
-        render();
-      } catch (error) {
-        console.error("Error deleting document: ", error.message);
-      }
-    });
-  });
-
-  editBtn.forEach((btn, index) => {
-    btn.addEventListener("click", async () => {
-      console.log("edit at index " + index);
-
-      const newTitle = prompt("Enter new Title");
-      const newCaption = prompt("Enter new Caption");
-
-      try {
-        const cityRef = doc(db, "newPost", arr[index].docId);
-
-        await updateDoc(cityRef, {
-          title: newTitle,
-          caption: newCaption,
-        });
-
-        render();
-      } catch (error) {
-        console.error("Error updating document: ", error.message);
-      }
-    });
   });
 }
 function formatDate(timestamp) {
