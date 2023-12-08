@@ -104,7 +104,7 @@ async function render() {
            }" class="rounded-xl w-32 h-32 mb-4" id="blog-img">
        </div >
 <div class="w-1/2">
-<h1 class="  text-3xl w-32 text-[#212529]">${item.title}</h1>
+<h1 class="  text-3xl text-[#212529]">${item.title}</h1>
 <div  class="">
 <h3 class="text-sm mt-1 text-[#6C757D]">${item.displayName}</h5>
 <h3 class="text-sm mt-1  text-[#6C757D]"> ${formatDate(
