@@ -19,8 +19,8 @@ import {
 import { auth, storage, db } from "./config.js";
 
 const userPfp = document.querySelector(".userPfp");
-const greetHead = document.querySelector("div h1");
-const div = document.querySelector("div .blogs-div");
+const div = document.querySelector(".blogs-div");
+const nameDiv = document.querySelector("div h1");
 const burgerIcon = document.getElementById("burger-icon");
 const mobileMenu = document.getElementById("mobile-menu");
 const title = document.querySelector("title");
@@ -63,23 +63,27 @@ burgerIcon.addEventListener("click", () => {
 let arr = [];
 
 async function render() {
-  const uid = localStorage.getItem("userDetails");
-
-  const q = await query(collection(db, "newPost"));
-
+  const data = localStorage.getItem("userDetails");
+  const userDetails = JSON.parse(data);
+  const userName = userDetails[0].name;
+  title.innerHTML = `See All from ${userName}`;
+  nameDiv.innerHTML = `All Posts from ${userName}`;
+  const userUid = userDetails[0].uid;
+  const q = query(
+    collection(db, "newPost"),
+    orderBy("postDate", "desc"),
+    where("uid", "==", userUid)
+  );
   const querySnapshot = await getDocs(q);
-
   div.innerHTML = "";
   arr = [];
   querySnapshot.forEach((doc) => {
     arr.push({ ...doc.data(), docId: doc.id });
   });
-  console.log(arr);
-
   // console.log(arr);
   arr.forEach((item, index) => {
     div.innerHTML += `
-    <div style="font-family: 'Poppins', sans-serif;" class="bg-white p-8 rounded-lg my-5  shadow-2xl max-w-xl ml-40 w-full " >
+    <div style="font-family: 'Poppins', sans-serif;" class="bg-white p-8 rounded-lg my-5  shadow-2xl  " >
        <div class="flex gap-5">
        <div class="mb-4 text-center">
            <img src="${
@@ -100,8 +104,9 @@ async function render() {
    
    <p  class="text-[#868686]  text-[14px] font-light mt-2 whitespace-normal break-words">
    ${item.caption}
-   </p>
 
+   <a id="seeAll" class="cursor-pointer text-amber-500 hover:text-orange-500 flex absolute right-2 ">See all from this user</a>
+   </p>
    </div>
    </div>
   `;

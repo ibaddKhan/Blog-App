@@ -93,7 +93,7 @@ async function render() {
   console.log(arr);
   arr.forEach((item, index) => {
     div.innerHTML += `
-    <div style="font-family: 'Poppins', sans-serif;" class="bg-white p-8 rounded-lg my-5  shadow-2xl max-w-xl ml-40 w-full " >
+    <div style="font-family: 'Poppins', sans-serif;" class="bg-white p-8  rounded-lg my-5  shadow-2xl max-w-xl  w-full " >
        <div class="flex gap-5">
        <div class="mb-4 text-center">
            <img src="${
@@ -126,15 +126,14 @@ async function render() {
   seeAll.forEach((item, index) => {
     item.addEventListener("click", () => {
       console.log("btn clicked at index", index);
-      // let detailsArr = [];
-      // const obj = {
-      //   uid: arr[index].docId,
-      //   name: arr[index].displayName,
-      // };
-      // detailsArr.push(obj);
+      let detailsArr = [];
+      const obj = {
+        uid: arr[index].uid,
+        name: arr[index].displayName,
+      };
+      detailsArr.push(obj);
 
-      const seeAlluid = arr[index].uid;
-      // const seeAlluid = JSON.stringify(detailsArr);
+      const seeAlluid = JSON.stringify(detailsArr);
       localStorage.setItem("userDetails", seeAlluid);
       window.location = "../app/seeAll.html";
     });

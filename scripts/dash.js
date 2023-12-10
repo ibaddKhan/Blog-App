@@ -137,32 +137,63 @@ async function render(uid, user) {
       console.log("removed at index " + index);
 
       try {
-        await deleteDoc(doc(db, "newPost", arr[index].docId));
-        render(uid, user);
+        Swal.fire({
+          title: "Do you want Delete?",
+          showDenyButton: true,
+          confirmButtonText: "Delete",
+          denyButtonText: `No`,
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            await deleteDoc(doc(db, "newPost", arr[index].docId));
+            render(uid, user);
+            Swal.fire("Deleted!");
+          }
+        });
       } catch (error) {
         console.error("Error deleting document: ", error.message);
       }
     });
   });
-
   editBtn.forEach((btn, index) => {
     btn.addEventListener("click", async () => {
       console.log("edit at index " + index);
 
-      const newTitle = prompt("Enter new Title");
-      const newCaption = prompt("Enter new Caption");
+      const editType = prompt("What do you want to edit? (title/caption)");
 
-      try {
-        const cityRef = doc(db, "newPost", arr[index].docId);
+      if (editType === "title") {
+        const newTitle = prompt("Enter new Title");
+        if (newTitle == null || newTitle == "") {
+          return;
+        }
 
-        await updateDoc(cityRef, {
-          title: newTitle,
-          caption: newCaption,
-        });
+        try {
+          const cityRef = doc(db, "newPost", arr[index].docId);
 
-        render(uid, user);
-      } catch (error) {
-        console.error("Error updating document: ", error.message);
+          await updateDoc(cityRef, {
+            title: newTitle,
+          });
+
+          render(uid, user);
+        } catch (error) {
+          console.error("Error updating document: ", error.message);
+        }
+      } else if (editType === "caption") {
+        const newCaption = prompt("Enter new Caption");
+        if (newCaption == null || newCaption == "") {
+          return;
+        }
+
+        try {
+          const cityRef = doc(db, "newPost", arr[index].docId);
+
+          await updateDoc(cityRef, {
+            caption: newCaption,
+          });
+
+          render(uid, user);
+        } catch (error) {
+          console.error("Error updating document: ", error.message);
+        }
       }
     });
   });
