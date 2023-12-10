@@ -66,6 +66,7 @@ onAuthStateChanged(auth, (user) => {
           caption: postCaption.value,
           uid: user.uid,
           photoURL: user.photoURL,
+          email: user.email,
           displayName: user.displayName,
           postDate: Timestamp.fromDate(new Date()),
         });

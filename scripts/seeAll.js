@@ -20,7 +20,10 @@ import { auth, storage, db } from "./config.js";
 
 const userPfp = document.querySelector(".userPfp");
 const div = document.querySelector(".blogs-div");
+const specificPfp = document.querySelector("div .userImg");
 const nameDiv = document.querySelector("div h1");
+const emailDiv = document.querySelector("div div div h3");
+const nameHead = document.querySelector("div .nameHead");
 const burgerIcon = document.getElementById("burger-icon");
 const mobileMenu = document.getElementById("mobile-menu");
 const title = document.querySelector("title");
@@ -66,8 +69,13 @@ async function render() {
   const data = localStorage.getItem("userDetails");
   const userDetails = JSON.parse(data);
   const userName = userDetails[0].name;
+  const userPhoto = userDetails[0].photoURL;
+  const userEmail = userDetails[0].email;
   title.innerHTML = `See All from ${userName}`;
   nameDiv.innerHTML = `All Posts from ${userName}`;
+  nameHead.innerHTML = `${userName}`;
+  emailDiv.innerHTML = `${userEmail}`;
+  specificPfp.src = userPhoto;
   const userUid = userDetails[0].uid;
   const q = query(
     collection(db, "newPost"),

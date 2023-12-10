@@ -130,7 +130,10 @@ async function render() {
       const obj = {
         uid: arr[index].uid,
         name: arr[index].displayName,
+        email: arr[index].email,
+        photoURL: arr[index].photoURL,
       };
+      console.log(arr[index].photoURL);
       detailsArr.push(obj);
 
       const seeAlluid = JSON.stringify(detailsArr);
