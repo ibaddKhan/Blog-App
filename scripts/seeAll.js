@@ -63,21 +63,19 @@ burgerIcon.addEventListener("click", () => {
 let arr = [];
 
 async function render() {
-  const data = localStorage.getItem("userDetails");
-  const userDetails = JSON.parse(data);
-  const userUid = userDetails[0].uid;
-  console.log(typeof userUid);
-  const newUid = +userUid;
-  console.log(typeof newUid);
-  const userName = userDetails[0].name;
-  title.innerHTML = `See All from ${userName}`;
-  const q = query(collection(db, "newPost"), orderBy("postDate", "desc"));
+  const uid = localStorage.getItem("userDetails");
+
+  const q = await query(collection(db, "newPost"));
+
   const querySnapshot = await getDocs(q);
+
   div.innerHTML = "";
   arr = [];
   querySnapshot.forEach((doc) => {
     arr.push({ ...doc.data(), docId: doc.id });
   });
+  console.log(arr);
+
   // console.log(arr);
   arr.forEach((item, index) => {
     div.innerHTML += `

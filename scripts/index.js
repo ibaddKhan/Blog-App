@@ -126,14 +126,15 @@ async function render() {
   seeAll.forEach((item, index) => {
     item.addEventListener("click", () => {
       console.log("btn clicked at index", index);
-      let detailsArr = [];
-      const obj = {
-        uid: arr[index].docId,
-        name: arr[index].displayName,
-      };
-      detailsArr.push(obj);
+      // let detailsArr = [];
+      // const obj = {
+      //   uid: arr[index].docId,
+      //   name: arr[index].displayName,
+      // };
+      // detailsArr.push(obj);
 
-      const seeAlluid = JSON.stringify(detailsArr);
+      const seeAlluid = arr[index].uid;
+      // const seeAlluid = JSON.stringify(detailsArr);
       localStorage.setItem("userDetails", seeAlluid);
       window.location = "../app/seeAll.html";
     });
