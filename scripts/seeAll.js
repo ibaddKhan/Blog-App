@@ -23,6 +23,7 @@ const greetHead = document.querySelector("div h1");
 const div = document.querySelector("div .blogs-div");
 const burgerIcon = document.getElementById("burger-icon");
 const mobileMenu = document.getElementById("mobile-menu");
+const title = document.querySelector("title");
 
 onAuthStateChanged(auth, (user) => {
   document.querySelector(".logout-btn").addEventListener("click", () => {
@@ -55,26 +56,6 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-function greetUser() {
-  const currentTime = new Date();
-  const currentHour = currentTime.getHours();
-
-  let greeting;
-
-  if (currentHour >= 5 && currentHour < 12) {
-    greeting = "Good Morning Readers!";
-  } else if (currentHour >= 12 && currentHour < 18) {
-    greeting = "Good Afternoon Readers!";
-  } else if (currentHour >= 18 && currentHour < 24) {
-    greeting = "Good Evening Readers!";
-  } else {
-    greeting = "Good Night Readers!";
-  }
-  greetHead.innerHTML = greeting;
-}
-
-greetUser();
-
 burgerIcon.addEventListener("click", () => {
   mobileMenu.classList.toggle("hidden");
 });
@@ -82,15 +63,22 @@ burgerIcon.addEventListener("click", () => {
 let arr = [];
 
 async function render() {
+  const data = localStorage.getItem("userDetails");
+  const userDetails = JSON.parse(data);
+  const userUid = userDetails[0].uid;
+  console.log(typeof userUid);
+  const newUid = +userUid;
+  console.log(typeof newUid);
+  const userName = userDetails[0].name;
+  title.innerHTML = `See All from ${userName}`;
   const q = query(collection(db, "newPost"), orderBy("postDate", "desc"));
-
   const querySnapshot = await getDocs(q);
   div.innerHTML = "";
   arr = [];
   querySnapshot.forEach((doc) => {
     arr.push({ ...doc.data(), docId: doc.id });
   });
-  console.log(arr);
+  // console.log(arr);
   arr.forEach((item, index) => {
     div.innerHTML += `
     <div style="font-family: 'Poppins', sans-serif;" class="bg-white p-8 rounded-lg my-5  shadow-2xl max-w-xl ml-40 w-full " >
@@ -99,7 +87,7 @@ async function render() {
            <img src="${
              item.photoURL
            }" class="rounded-xl w-32 h-32 mb-4" id="blog-img">
-       </div >
+       </div>
 <div class="w-1/2">
 <h1 class="  text-3xl text-[#212529]">${item.title}</h1>
 <div  class="">
@@ -116,27 +104,9 @@ async function render() {
    ${item.caption}
    </p>
 
-   <a id="seeAll" class="cursor-pointer text-amber-500 hover:text-orange-500 absolute right-2 ">See all from this user</a>
    </div>
    </div>
   `;
-  });
-  const seeAll = document.querySelectorAll("#seeAll");
-
-  seeAll.forEach((item, index) => {
-    item.addEventListener("click", () => {
-      console.log("btn clicked at index", index);
-      let detailsArr = [];
-      const obj = {
-        uid: arr[index].docId,
-        name: arr[index].displayName,
-      };
-      detailsArr.push(obj);
-
-      const seeAlluid = JSON.stringify(detailsArr);
-      localStorage.setItem("userDetails", seeAlluid);
-      window.location = "../app/seeAll.html";
-    });
   });
 }
 
