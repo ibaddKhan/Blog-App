@@ -83,7 +83,7 @@ async function render() {
   // console.log(arr);
   arr.forEach((item, index) => {
     div.innerHTML += `
-    <div style="font-family: 'Poppins', sans-serif;" class="bg-white p-8 rounded-lg my-5  shadow-2xl  " >
+    <div style="font-family: 'Poppins', sans-serif;" class="bg-white  p-8 rounded-lg my-5  shadow-2xl max-w-xl  w-full " >
        <div class="flex gap-5">
        <div class="mb-4 text-center">
            <img src="${
@@ -104,8 +104,6 @@ async function render() {
    
    <p  class="text-[#868686]  text-[14px] font-light mt-2 whitespace-normal break-words">
    ${item.caption}
-
-   <a id="seeAll" class="cursor-pointer text-amber-500 hover:text-orange-500 flex absolute right-2 ">See all from this user</a>
    </p>
    </div>
    </div>
