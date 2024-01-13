@@ -68,15 +68,15 @@ let arr = [];
 async function render() {
   const data = localStorage.getItem("userDetails");
   const userDetails = JSON.parse(data);
-  const userName = userDetails[0].name;
-  const userPhoto = userDetails[0].photoURL;
-  const userEmail = userDetails[0].email;
+  const userName = userDetails.name;
+  const userPhoto = userDetails.photoURL;
+  const userEmail = userDetails.email;
   title.innerHTML = `See All from ${userName}`;
   nameDiv.innerHTML = `All Posts from ${userName}`;
   nameHead.innerHTML = `${userName}`;
   emailDiv.innerHTML = `${userEmail}`;
   specificPfp.src = userPhoto;
-  const userUid = userDetails[0].uid;
+  const userUid = userDetails.uid;
   const q = query(
     collection(db, "newPost"),
     orderBy("postDate", "desc"),

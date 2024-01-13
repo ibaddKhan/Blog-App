@@ -50,11 +50,11 @@ onAuthStateChanged(auth, (user) => {
     const uid = user.uid;
     userPfp.src = user.photoURL;
     console.log(uid);
-    render(); // Render all data initially
+    render(); 
   } else {
     userPfp.src = "../assets/defaultuserprofile.png";
     console.log("No user logged in");
-    render(); // Render all data initially
+    render(); 
   }
 });
 
@@ -112,7 +112,7 @@ function renderPosts(posts) {
   div.innerHTML = "";
   posts.forEach((item, index) => {
     div.innerHTML += `
-      <div style="font-family: 'Poppins', sans-serif;" class="bg-white p-8  rounded-lg my-5  shadow-2xl max-w-xl  w-full " >
+      <div key=${index} style="font-family: 'Poppins', sans-serif;" class="bg-white p-8  rounded-lg my-5  shadow-2xl max-w-xl  w-full " >
         <div class="flex gap-5">
           <div class="mb-4 text-center">
             <img src="${
@@ -147,16 +147,15 @@ function renderPosts(posts) {
     item.addEventListener("click", () => {
       console.log("btn clicked at index", index);
       let detailsArr = [];
-      const obj = {
+      const objDetails = {
         uid: arr[index].uid,
         name: arr[index].displayName,
         email: arr[index].email,
         photoURL: arr[index].photoURL,
       };
       console.log(arr[index].photoURL);
-      detailsArr.push(obj);
 
-      const seeAlluid = JSON.stringify(detailsArr);
+      const seeAlluid = JSON.stringify(objDetails);
       localStorage.setItem("userDetails", seeAlluid);
       window.location = "../app/seeAll.html";
     });
