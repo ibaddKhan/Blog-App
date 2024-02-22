@@ -24,7 +24,7 @@ const greetHead = document.querySelector("div h1");
 const div = document.querySelector("div .blogs-div");
 const burgerIcon = document.getElementById("burger-icon");
 const mobileMenu = document.getElementById("mobile-menu");
-
+let filteredArr = null
 let arr = [];
 
 onAuthStateChanged(auth, (user) => {
@@ -50,11 +50,11 @@ onAuthStateChanged(auth, (user) => {
     const uid = user.uid;
     userPfp.src = user.photoURL;
     console.log(uid);
-    render(); 
+    render();
   } else {
     userPfp.src = "../assets/defaultuserprofile.png";
     console.log("No user logged in");
-    render(); 
+    render();
   }
 });
 
@@ -97,7 +97,7 @@ async function render() {
 
   filterInp.addEventListener("input", () => {
     const searchTerm = filterInp.value.toLowerCase();
-    const filteredArr = arr.filter((item) => {
+    filteredArr = arr.filter((item) => {
       return (
         item.title.toLowerCase().includes(searchTerm) ||
         item.caption.toLowerCase().includes(searchTerm) ||
@@ -115,9 +115,8 @@ function renderPosts(posts) {
       <div key=${index} style="font-family: 'Poppins', sans-serif;" class="bg-white p-8  rounded-lg my-5  shadow-2xl max-w-xl  w-full " >
         <div class="flex gap-5">
           <div class="mb-4 text-center">
-            <img src="${
-              item.photoURL
-            }" class="object-contain	 rounded-xl w-32 h-32 mb-4" id="blog-img">
+            <img src="${item.photoURL
+      }" class="object-contain	 rounded-xl w-32 h-32 mb-4" id="blog-img">
           </div >
           <div class="w-1/2">
             <div>
@@ -126,8 +125,8 @@ function renderPosts(posts) {
             <div  class="">
               <h3 class="text-sm mt-1 text-[#6C757D]">${item.displayName}</h5>
               <h3 class="text-sm mt-1  text-[#6C757D]"> ${formatDate(
-                item.postDate
-              )}</h3>
+        item.postDate
+      )}</h3>
             </div>
           </div>
         </div > 
@@ -146,20 +145,22 @@ function renderPosts(posts) {
   seeAll.forEach((item, index) => {
     item.addEventListener("click", () => {
       console.log("btn clicked at index", index);
+  
       let detailsArr = [];
       const objDetails = {
-        uid: arr[index].uid,
-        name: arr[index].displayName,
-        email: arr[index].email,
-        photoURL: arr[index].photoURL,
+        uid: filteredArr[index].uid,
+        name: filteredArr[index].displayName,
+        email: filteredArr[index].email,
+        photoURL: filteredArr[index].photoURL,
       };
-      console.log(arr[index].photoURL);
-
+      console.log(filteredArr[index].photoURL);
+  
       const seeAlluid = JSON.stringify(objDetails);
       localStorage.setItem("userDetails", seeAlluid);
       window.location = "../app/seeAll.html";
     });
   });
+  
 }
 
 function formatDate(timestamp) {
